@@ -93,9 +93,15 @@ toktyp lex2tok(char * fplex)
 /**********************************************************************/
 /* key2tok - convert a keyword to a token                             */
 /**********************************************************************/
-toktyp key2tok(char * fplex)
-{
-   printf("\n *** TO BE DONE");  return 0;
+toktyp key2tok(char * fplex) {
+   	int i;
+
+	for(i = 0; i < sizeof(keywordtab)/sizeof(keywordtab[0]); i++) {
+		if(!strcmp(fplex, keywordtab[i].text))
+			return 0;
+  // 			printf("\n *** KEY2TOK: %d", keywordtab[i].token);
+	} 
+	return 0;
    }
 
 /**********************************************************************/
