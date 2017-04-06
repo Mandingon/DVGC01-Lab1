@@ -80,6 +80,11 @@ void p_toktab()
 	{
 		printf("%s " " %d\n", keywordtab[i].text, keywordtab[i].token);
 	} 
+
+	for(int i = 0; i< sizeof(tokentab)/sizeof(tokentab[0]); i++)
+	{
+		printf("%s " " %d\n", tokentab[i].text, tokentab[i].token);	
+	}
 }
 
 /**********************************************************************/
