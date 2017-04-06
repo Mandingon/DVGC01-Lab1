@@ -1,0 +1,4 @@
+echo "*** Compiling Modues..."
+gcc -Wall -c driver.c
+gcc -Wall -c parser.c
+gcc -Wall 
