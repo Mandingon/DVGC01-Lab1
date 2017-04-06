@@ -102,8 +102,8 @@ toktyp key2tok(char * fplex) {
    	int i;
 
 	for(i = 0; i < sizeof(keywordtab)/sizeof(keywordtab[0]); i++) {
-		if(!strcmp(fplex, keywordtab[i].text))
-			return 0;
+//		if(!strcmp(fplex, keywordtab[i].text))
+//			return 0;
   // 			printf("\n *** KEY2TOK: %d", keywordtab[i].token);
 	} 
 	return 0;
