@@ -108,12 +108,13 @@ toktyp lex2tok(char * fplex)
 /**********************************************************************/
 toktyp key2tok(char * fplex) {
    	int i;
-
-	for(i = 0; i < sizeof(keywordtab)/sizeof(keywordtab[0]); i++) {
+	fplex = "input";
+	while(keywordtab[i].token != nfound) {
 		if(fplex != NULL && !strcmp(fplex, keywordtab[i].text))
    			printf("\n *** KEY2TOK: %d", keywordtab[i].token);
 
-		printf("\nKeywordtab[%d]: %s\n",i, keywordtab[i].text);  
+	//	printf("\nKeywordtab[%d]: %s\n",i, keywordtab[i].text);
+		i++;  
 	} 
 	return 0;
    }
