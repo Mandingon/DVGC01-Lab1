@@ -27,9 +27,6 @@ static int  is_parse_ok=1;
 /**********************************************************************/
 /* RAPID PROTOTYPING - simulate the token stream & lexer (get_token)  */
 /**********************************************************************/
-/* define tokens + keywords NB: remove this when keytoktab.h is added */
-/**********************************************************************/
-enum tvalues { program = 257, id, input, output };
 /**********************************************************************/
 /* Simulate the token stream for a given program                      */
 /**********************************************************************/
