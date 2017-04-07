@@ -128,12 +128,13 @@ toktyp lex2tok(char * fplex)
 toktyp key2tok(char * fplex) {
    	int i = 0;
 	while(keywordtab[i].token != nfound) {
-		if(fplex != NULL && !strcmp(fplex, keywordtab[i].text))
-   			printf("\n *** KEY2TOK: %d", keywordtab[i].token);
+		if(fplex != NULL && !strcmp(fplex, keywordtab[i].text)) {
+			return keywordtab[i].token;
+		}
 
 		i++;  
 	} 
-	return 0;
+	return id;
    }
 
 /**********************************************************************/
