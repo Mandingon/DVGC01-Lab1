@@ -100,7 +100,26 @@ void p_toktab()
 /**********************************************************************/
 toktyp lex2tok(char * fplex)
 {
-   printf("\n *** TO BE DONE");  return 0;
+	int i = 0;
+	while(keywordtab[i].token != nfound)
+	{
+		if(!strcmp(fplex,keywordtab[i].text))
+		{
+			return keywordtab[i].token;
+		}
+		i++;
+	}
+	
+	i = 0;	
+	while(tokentab[i].token != nfound)
+	{
+		if(!strcmp(fplex,tokentab[i].text))
+		{
+			return tokentab[i].token;
+		}
+		i++;
+	}
+	return 0;
    }
 
 /**********************************************************************/
