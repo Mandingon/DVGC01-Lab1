@@ -34,19 +34,17 @@ static int  plex  = 0;               /* current index lexeme  buffer  */
 /* Read the input file into the buffer                                */
 /**********************************************************************/
 
-static void get_prog()
-{
-   printf("\n *** TO BE DONE");
+static void get_prog() {
+	fgets(buffer, BUFSIZE, stdin);
    }     
 
 /**********************************************************************/
 /* Display the buffer                                                 */
 /**********************************************************************/  
 
-static void pbuffer()
-{   
-   printf("\n *** TO BE DONE");
-   }
+static void pbuffer() {
+	printf("%s", buffer);   
+}
 
 /**********************************************************************/
 /* Copy a character from the program buffer to the lexeme buffer      */
@@ -67,10 +65,11 @@ static void get_char()
 /**********************************************************************/
 /* Return a token                                                     */
 /**********************************************************************/
-int get_token()
-{  
-   printf("\n *** TO BE DONE"); return 0;
-   }
+int get_token(){
+	get_prog();
+	pbuffer();
+	return getchar(); 
+}
 
 /**********************************************************************/
 /* Return a lexeme                                                    */
