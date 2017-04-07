@@ -1,0 +1,11 @@
+echo "*** Compiling Modules"
+gcc -Wall -c Dlexer.c
+gcc -Wall -c lexer.c
+gcc -Wall -c keytoktab.c
+echo "*** Building the lexer" 
+gcc -Wall -o tlexer Dlexer.c lexer.c keytoktab.c 
+echo "*** Running lexer"
+./tlexer < testok1.pas > Dlexer.out 
+echo "*** Saving output to Dlexer.out"
+echo "*** Cleaning up"
+rm *.o
