@@ -113,7 +113,7 @@ toktyp key2tok(char * fplex) {
 		if(fplex != NULL && !strcmp(fplex, keywordtab[i].text))
    			printf("\n *** KEY2TOK: %d", keywordtab[i].token);
 
-		printf("\nKeywordtab[%d]: %s\n",i, keywordtab[i].text);  
+	//	printf("\nKeywordtab[%d]: %s\n",i, keywordtab[i].text);  
 	} 
 	return 0;
    }
@@ -123,8 +123,28 @@ toktyp key2tok(char * fplex) {
 /**********************************************************************/
 char * tok2lex(toktyp ftok)
 {
-   printf("\n *** TO BE DONE");  return "input";
-   }
+
+	int i = 0;
+	while(keywordtab[i].token != nfound)
+	{
+		if(ftok == keywordtab[i].token)
+		{
+			return keywordtab[i].text;
+		}
+		i++;
+	}
+
+	i = 0;
+	while(tokentab[i].token != nfound)
+	{
+		if(ftok == tokentab[i].token)
+		{	
+			return tokentab[i].text;
+		}
+		i++;
+	}
+	return 0;
+}
 
 /**********************************************************************/
 /* End of code                                                        */
