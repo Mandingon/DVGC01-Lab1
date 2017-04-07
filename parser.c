@@ -51,13 +51,13 @@ static int pget_token()
 /**********************************************************************/
 static void match(int t)
 {
-   if(DEBUG) printf("\n --------In match expected: %4d, found: %4d",
-                    t, lookahead);
+   if(DEBUG) printf("\n --------In match expected: %10s, found: %10s",
+                    tok2lex(t), tok2lex(lookahead));
    if (lookahead == t) lookahead = pget_token();
    else {
       is_parse_ok=0;
-      printf("\n *** Unexpected Token: expected: %4d found: %4d (in match)",
-              t, lookahead);
+      printf("\n *** Unexpected Token: expected: %10s found: %10s (in match)",
+              tok2lex(t), tok2lex(lookahead));
       }
    }
 
