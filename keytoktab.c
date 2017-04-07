@@ -74,16 +74,24 @@ static tab keywordtab[ ] = {
 /**********************************************************************/
 void p_toktab()
 {  
-   	int i;
-
-	for(i = 0; i < sizeof(keywordtab)/sizeof(keywordtab[0]); i++)
+   	int i = 0;
+	printf("____________________\n");	
+	printf("THE PROGRAM KEYWORDS\n");
+	printf("____________________\n");	
+	while(keywordtab[i].token != nfound)
 	{
-		printf("%s " " %d\n", keywordtab[i].text, keywordtab[i].token);
+		printf("%10s  %5d\n", keywordtab[i].text, keywordtab[i].token);
+		i++;
 	} 
 
-	for(int i = 0; i< sizeof(tokentab)/sizeof(tokentab[0]); i++)
-	{
-		printf("%s " " %d\n", tokentab[i].text, tokentab[i].token);	
+	i = 0;
+	printf("____________________\n");	
+	printf("THE PROGRAM TOKENS \n");
+	printf("____________________\n");	
+	while(tokentab[i].token != nfound){
+	
+		printf("%10s " "%6d\n", tokentab[i].text, tokentab[i].token);	
+		i++;
 	}
 }
 
