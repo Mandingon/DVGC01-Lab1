@@ -35,15 +35,29 @@ static int  plex  = 0;               /* current index lexeme  buffer  */
 /**********************************************************************/
 
 static void get_prog() {
-	fgets(buffer, BUFSIZE, stdin);
-   }     
+
+	int  i = 0;
+
+    	while ((buffer[i]=fgetc(stdin))!='$')
+	{
+		 i++;
+	}
+	
+   	buffer[i]='\0';
+     
+}     
 
 /**********************************************************************/
 /* Display the buffer                                                 */
 /**********************************************************************/  
 
 static void pbuffer() {
-	printf("%s", buffer);   
+
+  
+   printf("\n --------- file text \n ");
+   printf("\n%s", buffer );
+   printf("\n --------- end of file text \n ");
+      
 }
 
 /**********************************************************************/
@@ -52,7 +66,9 @@ static void pbuffer() {
 
 static void get_char()
 {   
-   printf("\n *** TO BE DONE");
+	lexbuf[plex] =	buffer[pbuf];
+	pbuf++;
+	plex++;;
    }
 
 /**********************************************************************/
@@ -66,17 +82,25 @@ static void get_char()
 /* Return a token                                                     */
 /**********************************************************************/
 int get_token(){
-	get_prog();
-	pbuffer();
-	return getchar(); 
+ 	return lex2tok(get_lexeme());
 }
 
 /**********************************************************************/
 /* Return a lexeme                                                    */
 /**********************************************************************/
 char * get_lexeme()
-{  
-   printf("\n *** TO BE DONE");  return "$";
+{	
+	if(isalnum(buffer[pbuf]))
+	{
+		while(isalnum(buffer[pbuf]) && buffer[pbuf] != " ")
+		{
+			get_char();
+		} 
+	}
+	
+	pbuf++;
+	plex = 0;
+	return lexbuf;
    }
 
 /**********************************************************************/
