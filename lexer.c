@@ -106,9 +106,13 @@ int get_token(){
 		}
 		else
 		{
+			if(buffer[pbuf] == ':' && buffer[pbuf+1] == '=') {
+				get_char();
+				continue;
+			}
 			get_char();
 			plex = 0;
-			return lex2tok(lexbuf);
+			return key2tok(lexbuf);
 			
 		}
 	}
