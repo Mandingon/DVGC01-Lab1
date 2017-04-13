@@ -34,7 +34,7 @@ static int  plex  = 0;               /* current index lexeme  buffer  */
 /* Read the input file into the buffer                                */
 /**********************************************************************/
 
-static void get_prog() {
+void get_prog() {
 
 	int  i = 0;
 
@@ -51,7 +51,7 @@ static void get_prog() {
 /* Display the buffer                                                 */
 /**********************************************************************/  
 
-static void pbuffer() {
+ void pbuffer() {
 
   
    printf("\n --------- file text \n ");
@@ -67,8 +67,8 @@ static void pbuffer() {
 static void get_char()
 {   
 	lexbuf[plex] =	buffer[pbuf];
+	plex++;
 	pbuf++;
-	plex++;;
    }
 
 /**********************************************************************/
@@ -83,21 +83,40 @@ static void get_char()
 /**********************************************************************/
 int get_token(){
 
- /*	get_prog();
+	memset(lexbuf, 0, sizeof(lexbuf));
 	
-	if(isalnum(buffer[pbuf]))
+
+	while(1)
 	{
-		while(isalnum(buffer[pbuf]))
+		if(isalnum(buffer[pbuf]))
 		{
 			get_char();
-		} 
+			if(!isalnum(buffer[pbuf]))
+			{
+				
+				plex = 0;
+				return key2tok(lexbuf);
+			}
+		}
+		else if(isspace(buffer[pbuf]))
+		{
+			pbuf++;
+			memset(lexbuf,0,sizeof(lexbuf));
+			continue;
+		}
+		else
+		{
+			get_char();
+			plex = 0;
+			return lex2tok(lexbuf);
+			
+		}
 	}
 	
-	pbuf++;
 	plex = 0;
 
-	return lex2tok(lexbuf) ; */
-return 0;
+	return error;
+
 }
 
 /**********************************************************************/
@@ -106,10 +125,9 @@ return 0;
 char * get_lexeme()
 {	
 
-	return tok2lex(268);
+	return  lexbuf;
    }
 
 /**********************************************************************/
 /* End of code                                                        */
 /**********************************************************************/
-

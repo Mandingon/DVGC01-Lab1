@@ -36,11 +36,11 @@ static int tokens[] = {program, id, '(', input, ',', output, ')', ';',
 /**********************************************************************/
 /*  Simulate the lexer -- get the next token from the buffer          */
 /**********************************************************************/
-static int pget_token()
+/*static int pget_token()
 {  
    static int i=0;
    if (tokens[i] != '$') return tokens[i++]; else return '$';
-   }
+   }*/
 
 /**********************************************************************/
 /*  PRIVATE METHODS for this OBJECT  (using "static" in C)            */
@@ -51,13 +51,13 @@ static int pget_token()
 /**********************************************************************/
 static void match(int t)
 {
-   if(DEBUG) printf("\n --------In match expected: %10s, found: %10s",
-                    tok2lex(t), tok2lex(lookahead));
-   if (lookahead == t) lookahead = pget_token();
+   if(DEBUG) printf("\n --------In match expected: %10s, found: %10s", tok2lex(t), tok2lex(lookahead));
+ 
+  if (lookahead == t) lookahead = get_token();
+
    else {
       is_parse_ok=0;
-      printf("\n *** Unexpected Token: expected: %10s found: %10s (in match)",
-              tok2lex(t), tok2lex(lookahead));
+      printf("\n *** Unexpected Token: expected: %10s found: %10s (in match)", tok2lex(t), tok2lex(lookahead));
       }
    }
 
@@ -164,7 +164,7 @@ static void program_header()
 int parser()
 {
    if (DEBUG) printf("\n *** In  parser");
-   lookahead = pget_token();       // get the first token
+   lookahead = get_token();       // get the first token
    program_header();               // call the first grammar rule
    var_part();			   // call the 2nd grammar rule
    stat_part();			   // call the 3rd grammar rule

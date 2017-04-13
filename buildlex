@@ -8,4 +8,6 @@ echo "*** Running lexer"
 ./tlexer < testok1.pas > Dlexer.out 
 echo "*** Saving output to Dlexer.out"
 echo "*** Cleaning up"
+echo "*** Displaying output"
+vim Dlexer.out
 rm *.o
