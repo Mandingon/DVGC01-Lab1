@@ -38,7 +38,7 @@ static void get_prog() {
 
 	int  i = 0;
 
-    	while ((buffer[i]=fgetc(stdin))!='$')
+    	while ((buffer[i]=fgetc(stdin))!=EOF)
 	{
 		 i++;
 	}
@@ -82,17 +82,12 @@ static void get_char()
 /* Return a token                                                     */
 /**********************************************************************/
 int get_token(){
- 	return lex2tok(get_lexeme());
-}
 
-/**********************************************************************/
-/* Return a lexeme                                                    */
-/**********************************************************************/
-char * get_lexeme()
-{	
+ /*	get_prog();
+	
 	if(isalnum(buffer[pbuf]))
 	{
-		while(isalnum(buffer[pbuf]) && buffer[pbuf] != " ")
+		while(isalnum(buffer[pbuf]))
 		{
 			get_char();
 		} 
@@ -100,7 +95,18 @@ char * get_lexeme()
 	
 	pbuf++;
 	plex = 0;
-	return lexbuf;
+
+	return lex2tok(lexbuf) ; */
+return 0;
+}
+
+/**********************************************************************/
+/* Return a lexeme                                                    */
+/**********************************************************************/
+char * get_lexeme()
+{	
+
+	return tok2lex(268);
    }
 
 /**********************************************************************/
