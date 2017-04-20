@@ -3,9 +3,9 @@ gcc -Wall -c driver.c
 gcc -Wall -c parser.c 
 gcc -Wall -c keytoktab.c
 echo "*** Compiling Program"
-gcc -Wall -o parser driver.c parser.c keytoktab.c 
+gcc -Wall -o parser driver.c parser.c keytoktab.c lexer.c  
 echo "*** Testing the Parser"
-./parser > driverV2.out
+./parser <testok1.pas> driverV2.out
 echo "*** Saving output to driverV2.out" 
 echo "*** Cleaning up"
 rm *.o
