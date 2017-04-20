@@ -88,15 +88,26 @@ int get_token(){
 
 	while(1)
 	{
-		if(isalnum(buffer[pbuf]))
+
+		if(isalpha(buffer[pbuf]))
 		{
-			get_char();
-			if(!isalnum(buffer[pbuf]))
+			while(isalnum(buffer[pbuf])) 
 			{
+				get_char();
+			}
 				
 				plex = 0;
 				return key2tok(lexbuf);
+			
+		}
+		else if(isdigit(buffer[pbuf])) 
+		{
+			while(isdigit(buffer[pbuf])) 
+			{
+				get_char();
 			}
+			plex = 0;
+			return number;
 		}
 		else if(isspace(buffer[pbuf]))
 		{
@@ -112,7 +123,7 @@ int get_token(){
 			}
 			get_char();
 			plex = 0;
-			return key2tok(lexbuf);
+			return lex2tok(lexbuf);
 			
 		}
 	}
