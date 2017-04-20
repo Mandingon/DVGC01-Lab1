@@ -23,7 +23,9 @@
 #define DEBUG 1
 static int  lookahead=0;
 static int  is_parse_ok=1;
-
+void expr();
+void get_prog();
+void pbuffer();
 /**********************************************************************/
 /* RAPID PROTOTYPING - simulate the token stream & lexer (get_token)  */
 /**********************************************************************/
@@ -164,6 +166,8 @@ static void program_header()
 int parser()
 {
    if (DEBUG) printf("\n *** In  parser");
+   get_prog();
+   pbuffer();
    lookahead = get_token();       // get the first token
    program_header();               // call the first grammar rule
    var_part();			   // call the 2nd grammar rule
