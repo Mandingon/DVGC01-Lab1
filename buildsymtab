@@ -1,0 +1,14 @@
+
+echo "*** Compiling Modules"
+gcc -Wall -c Dsymtab.c
+gcc -Wall -c symtab.c
+gcc -Wall -c keytoktab.c
+echo "*** Building the symtab" 
+gcc -Wall -o symtab Dsymtab.c symtab.c keytoktab.c 
+echo "*** Running symtab"
+./symtab > Dsymtab.out 
+echo "*** Saving output to Dsymtab.out"
+echo "*** Cleaning up"
+echo "*** Displaying output"
+vim Dsymtab.out
+rm *.o
