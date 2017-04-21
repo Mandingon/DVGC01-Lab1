@@ -14,8 +14,8 @@
 /**********************************************************************/
 #include "keytoktab.h"               /* when the keytoktab is added   */
 #include "lexer.h"                   /* when the lexer     is added   */
-/* #include "symtab.h"      */       /* when the symtab    is added   */
-/* #include "optab.h"       */       /* when the optab     is added   */
+#include "symtab.h"                  /* when the symtab    is added   */
+#include "optab.h"                   /* when the optab     is added   */
 
 /**********************************************************************/
 /* OBJECT ATTRIBUTES FOR THIS OBJECT (C MODULE)                       */
@@ -66,46 +66,92 @@ static void match(int t)
 /**********************************************************************/
 /* The grammar functions                                              */
 /**********************************************************************/
-void operand() {
-	if(lookahead == id) 
-		match(id);
-	else if(lookahead == number)
-		match(number);
+static toktyp  operand() 
+{
+	if(DEBUG) printf("\n *** In operand");
 
+	if(lookahead == id)
+	{ 
+		if(!find_name(get_lexeme())) 
+		{
+			printf("\nSEMANTCIC: ID NOT DECLARED: %s", get_lexeme());
+			is_parse_ok = 0;
+		}
+		
+		toktyp tt = get_ntype(get_lexeme());
+		(match(id);
+		return tt;
+	}
+	
+	else if(lookahead == number)
+	{
+		match(number);
+		return integer;
+	}
+	
+	else 
+	{
+		printf("\n SYNTAX: OPERAND EXPECTED");
+		return errror;
+	}
 }
-void factor() {
+static toktyp factor() 
+{
+	if(DEBUG) printf("\n *** In factor");
+	toktyp tt; 
 	if(lookahead == '(') {
 		match('(');
-		expr();
+	 	tt = expr();
 		match(')');
 	}
 	else 
-		operand();
+		tt = operand();
+
+return tt;
 }
-void term() {
-	factor();
+void term()
+{
+
+	if(DEBUG) printf("\n *** In term");
+	toktyp tt = factor();
 	if(lookahead == '*') {
 		match('*');
-		term();
+		return get_otype('*', term(), tt);
+		
 	}
+return tt;
 }
-void expr() {
-	term();
+void expr()
+{
+
+	if(DEBUG) printf("\n *** In expr");
+	toktyp tt = term();
 	if(lookahead == '+') {
 		match('+');
-		expr();
+		return get_otype('+', expr(), tt);
+		
 	}
-
+return tt;
 }
-void assign_stat() {
+void assign_stat() 
+{
+	
+	if(DEBUG) printf("\n *** In assign_ stat");
+	if(!find_name(get_lexeme()))
+	{
+		addv_name(get_lexeme());
+	}
+	
 	match(id);
 	match(assign);
 	expr();
 }
 void stat() {
+	if(DEBUG) printf("\n *** In stat");
 	assign_stat();
 }
 void stat_list() {
+	if(DEBUG) printf("\n *** In stat_list");
 	stat();
 	if(lookahead == ';') {
 		match(';');
@@ -121,13 +167,27 @@ void stat_part() {
 }
 void type() {
 	if(lookahead == integer)
+	{	
+		setv_type(integer);
 		match(integer);
-/*	else if(lookahead == real)
+	}
+	else if(lookahead == real)
+	{
+		setv_type(real);
 		match(real);
+	}
 	else if(lookahead == boolean)
-		match(boolean); */
+	{	
+		setv_type(boolean);
+		match(boolean); 
+	}
 }
 void id_list() {
+	 
+	if(!find_name(get_lexeme()))
+	{
+		addv_name(get_lexeme());	
+	}
 	match(id);
 	if(lookahead == ',') {
 		match(',');
@@ -155,7 +215,7 @@ void var_part() {
 static void program_header()
 {
    if (DEBUG) printf("\n *** In  program_header");
-   match(program); match(id); match('('); match(input);
+   match(program); addp_name(get_lexeme()); match(id); match('('); match(input);
    match(','); match(output); match(')'); match(';');
    }
    
@@ -172,6 +232,7 @@ int parser()
    program_header();               // call the first grammar rule
    var_part();			   // call the 2nd grammar rule
    stat_part();			   // call the 3rd grammar rule
+   p_symtab();
    return is_parse_ok;             // status indicator
    }
 

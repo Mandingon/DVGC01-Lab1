@@ -1,0 +1,13 @@
+
+echo "*** Compiling Modules"
+gcc -Wall -c Doptab.c  
+gcc -Wall -c optab.c  
+echo "*** Building the optab" 
+gcc -Wall -o toptab Doptab.c optab.c keytoktab.c 
+echo "*** Running lexer"
+./toptab > Doptab.out 
+echo "*** Saving output to Doptab.out"
+echo "*** Cleaning up"
+echo "*** Displaying output"
+vim Doptab.out
+rm *.o
