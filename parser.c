@@ -181,6 +181,11 @@ void type() {
 		setv_type(boolean);
 		match(boolean); 
 	}
+/*	else 
+	{
+		setv_type(error)
+		printf(" \n"
+	}*/
 }
 void id_list() {
 	 
