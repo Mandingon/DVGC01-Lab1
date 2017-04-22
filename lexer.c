@@ -42,8 +42,8 @@ void get_prog() {
 	{
 		 i++;
 	}
-	
-   	buffer[i]='\0';
+	buffer[i] = '$';
+   	buffer[i+1]='\0';
      
 }     
 
@@ -52,11 +52,12 @@ void get_prog() {
 /**********************************************************************/  
 
  void pbuffer() {
-
-  
-   printf("\n --------- file text \n ");
+   printf("\n");
+   printf("______________________________________________________________");
+   printf("\nTHE PROGRAM TEXT\n");
+   printf("______________________________________________________________");
    printf("\n%s", buffer );
-   printf("\n --------- end of file text \n ");
+  // printf("\n --------- end of file text \n ");
       
 }
 
